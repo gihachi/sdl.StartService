@@ -1,6 +1,8 @@
 package jp.ac.titech.itpro.sdl.startservice;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 switch (action) {
                     case Service3.END_SERVICE:
+                        colorChange(Color.GRAY);
                         Toast.makeText(context , "end service", Toast.LENGTH_LONG).show();
                         break;
                 }
@@ -63,7 +66,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onClickTest3 in " + Thread.currentThread());
         Intent intent = new Intent(this, Service3.class);
         intent.putExtra(Service3.EXTRA_MYARG, "Hello, Service3");
+        colorChange(Color.RED);
         startService(intent);
+    }
+
+    public void colorChange(int colorCode){
+        Button button = findViewById(R.id.test3_button);
+        Drawable colorDrawable = new ColorDrawable(colorCode);
+        button.setBackgroundDrawable(colorDrawable);
     }
 
     @Override
